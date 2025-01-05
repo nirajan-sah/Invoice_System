@@ -1,0 +1,5 @@
+2 Bread 35
+5 Milk 100
+3 Tea 130
+6 Coffee 499.99
+7 bottle 599.99
