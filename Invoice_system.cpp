@@ -1,9 +1,11 @@
 #include<iostream> 	//input and output
 #include<string>	//string input
-#include<conio.h>	//getch function
 #include<iomanip>	//for setw function
 #include<fstream>	//file handling
 #include<ctime>		//for time and date
+
+
+#include "Bill.h"
 
 using namespace std;
 
@@ -20,10 +22,10 @@ public:
     // Parameterized constructor to write details to file 
     Product(int pNum, string pNam, float rate) : productNumber(pNum), productName(pNam), productRate(rate) {
         ofstream outProduct;
-        outProduct.open("Products.txt", ios::out | ios::app);// Open "Products.txt" in append mode to store product details
-        outProduct << productNumber << ' ' << productName << ' ' << productRate << endl; // Write product details
+        outProduct.open("Products.txt", ios::out | ios::app);
+        outProduct << productNumber << ' ' << productName << ' ' << productRate << endl;
         cout << "\n\n\n\tPRODUCT CREATED SUCCESSFULLY";
-        getch(); //pause program and start again when user input single character
+        cin.get();
     }
 
     // Getter for product number, name, rate (access the value)
@@ -37,32 +39,6 @@ public:
     void setRate(float x) { productRate = x; }
 };
 
-class Bill {
-public:
-	string date;		//To store the date and time of the invoice
-	float totalAmount;	
-	string customerName;
-public:
-	virtual void storeInvoice()
-	{
-		cout<<"No Inovice";
-	}
-	//Default constructor : Initialized the date with current time and amount
-	Bill()
-	{
-		// current date/time on current system
-		time_t now = time(0);
-
-		// convert now to string form
-		char* dt = ctime(&now);
-
-		//assign date to 'date' attribute
-		date = dt;
-		//by default total amount is 0
-		totalAmount = 0;
-
-	}
-};
 
 class BillItems {
 private:
@@ -177,7 +153,7 @@ protected:
 
         cout << "\n\n\tEnter New Admin Password: ";				//password of that username
         char ch;
-        while ((ch = getch()) != '\r') 							//will continue to read the char until the enter key is pressed
+        while ((ch = cin.get()) != '\r') 							//will continue to read the char until the enter key is pressed
 		{ 
             if (ch == '\b' && !newPassword.empty()) {			//if backspace is pressed then this loop will check if there is char in the newpassword
                 newPassword.pop_back();							//pop_back will delete the last character
@@ -190,7 +166,7 @@ protected:
 
 		//using same algorithm as before
         cout << "\n\n\tConfirm Password: ";			
-        while ((ch = getch()) != '\r') {
+        while ((ch = cin.get()) != '\r') {
             if (ch == '\b' && !confirmPassword.empty()) {
                 confirmPassword.pop_back();
                 cout << "\b \b";
@@ -204,7 +180,7 @@ protected:
         if (newPassword != confirmPassword) {
             cout << "\n\n\tError: Passwords do not match. Admin user not added.";
             cout << "\n\tPress any key to continue...";
-            getch();
+            cin.get();
             return;
         }
 
@@ -213,7 +189,7 @@ protected:
         if (!adminData) {
             cerr << "\n\n\tError: Unable to access admindatabase file.";	//if file doesn't exist or unable to create it
             cout << "\n\tPress any key to continue...";
-            getch();
+            cin.get();
             return;
         }
 
@@ -222,7 +198,7 @@ protected:
 
         cout << "\n\n\tNew Admin User Added Successfully!";
         cout << "\n\tPress any key to continue...";
-        getch();
+        cin.get();
     }
 
 	//static bool is entered because we only expect output of true or false from this.
@@ -239,7 +215,7 @@ protected:
         enteredPassword = "";
 
         // Hide password input
-        while ((ch = getch()) != '\r') { // Enter key ends input
+        while ((ch = cin.get()) != '\r') { // Enter key ends input
             if (ch == '\b' && !enteredPassword.empty()) {
                 enteredPassword.pop_back();
                 cout << "\b \b";
@@ -279,7 +255,7 @@ public:
 	static void user()
 	{
 		int ch;
-		system("cls");
+		system("clear");
 		cout << "\n\n\n\t\t\t\t\t\t\tNIRAJAN'S STORE"<<endl;
 		cout << "\t\t\t\t================================================================\n";
 		cout << "\n\n\t\t\t\t\t\t\t*************";
@@ -306,7 +282,7 @@ public:
 		int code;
 		int qty;
 		Invoice fBill;	//calling variable for class Invoice
-		system("cls");
+		system("clear");
 		cout<<"\n\n\t1.Go Back to Main Menu.";
 		cout<<"\n\n\t2.Continue to Invoice...\n";
 		cout<<"\n\n\tChoose: ";
@@ -345,7 +321,7 @@ public:
 		}
 
 		//To print the Invoice of the customer
-		system("cls");
+		system("clear");
 		cout<<"\n\tCustomer Name: "<<fBill.customerName<<"\n";
         cout << "\n\n\tINVOICE \t\t\tDate/Time: " << fBill.date << endl;
         cout << "\t======================================================================================" << endl;
@@ -359,7 +335,7 @@ public:
         cout << "\n\n\t\t\t\tTOTAL AMOUNT: " << fBill.totalAmount;
         cout << "\n\tThank You for Shopping" << endl;
         cout << "\n\tPress any key to continue...";
-        getch();
+        cin.get();
 
         fBill.storeInvoice();	//will store the data to Invoices.txt
     }
@@ -370,12 +346,12 @@ public:
 		if(!authorizeAdmin())	//only valide username and password will let to enter the admin portal
 		{
 			cout<<"\n\n\tReturing to the main menu....\n";
-			getch();
+			cin.get();
 			return;
 		}
 		while (1)
 		{
-			system("cls");
+			system("clear");
 			int ch;
 			cout << "\n\n\n\tADMIN MENU";
 			cout << "\n\n\t1.CREATE PRODUCT";
@@ -397,7 +373,7 @@ public:
 			case 6: addAdminUser(); break;
 			case 7: return;
 			default: cout<<"\n\tInvalid choice. Try again. "; 
-			getch();
+			cin.get();
 			}
 		}
 	}
@@ -425,7 +401,7 @@ public:
 
 	static void createProduct()
 	{
-		system("cls");
+		system("clear");
 		int n;
 		string p;
 		float r;
@@ -448,7 +424,7 @@ public:
 	//simply displays all the product
 	static void displayProduct()
 	{
-		system("cls");
+		system("clear");
 		ifstream displayProducts;						//open the file in read
 		displayProducts.open("Products.txt", ios::in);
 		int n;
@@ -468,12 +444,12 @@ public:
 			cout << "\n\t=================================================================";
 		}
 		cout<<"\n\tPress any key";
-		getch();
+		cin.get();
 	}
 	
 	static void modifyProduct()
 	{
-		system("cls");
+		system("clear");
 		displayProduct();		//first display all products for the users to select the product
 		ifstream prodIn;
 		ofstream prodTmp;
@@ -505,13 +481,13 @@ public:
 		remove("Products.txt");					//delets the file
 		rename("temp.txt", "Products.txt");		//renames the file
 		cout << "\n\n\n\tPRODUCT RATE UPDATED SUCCESSFULLY";
-		getch();
+		cin.get();
 	}
 
 	//Function to delete products
 	static void deleteProduct()
 	{
-		system("cls");
+		system("clear");
 		displayProduct();//first display all products for the users to select the product
 		ifstream prodIn;
 		ofstream prodTmp;
@@ -541,17 +517,17 @@ public:
 		remove("Products.txt");					//removes the file
 		rename("temp.txt", "Products.txt");		//renames the file
 		cout << "\n\n\n\tPRODUCT DELETED SUCCESSFULLY";
-		getch();
+		cin.get();
 	}
 
 	static void displayInvoices() {
-        system("cls");
+        system("clear");
         ifstream inInvoice;
         inInvoice.open("Invoices.txt", ios::in);	//open in read
         if (!inInvoice) {							//if file is not created or found
             cout << "\n\n\tNO INVOICES FOUND!";
             cout << "\n\tPress any key";
-            getch();
+            cin.get();
             return;
         }
 
@@ -563,13 +539,13 @@ public:
         }
         inInvoice.close();
         cout << "\n\tPress any key";
-        getch();
+        cin.get();
     }	
 };
 
 int main()
 {
-	system("cls");//function for clearing the screen in visual studio
+	system("clear");//function for clearing the screen in visual studio
 	while (1)
 	{
 		NavPages::user();
