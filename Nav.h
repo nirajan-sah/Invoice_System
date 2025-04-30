@@ -99,7 +99,7 @@ class NavPages : public Admin{
             cout << "\n\n\t\t\t\tTOTAL AMOUNT: " << fBill.totalAmount;
             cout << "\n\tThank You for Shopping" << endl;
             cout << "\n\tPress any key to continue...";
-            cin.get();
+            cin.ignore();
     
             fBill.storeInvoice();	//will store the data to Invoices.txt
         }
@@ -110,7 +110,7 @@ class NavPages : public Admin{
             if(!authorizeAdmin())	//only valide username and password will let to enter the admin portal
             {
                 cout<<"\n\n\tReturing to the main menu....\n";
-                cin.get();
+                cin.ignore();
                 return;
             }
             while (1)
@@ -137,7 +137,7 @@ class NavPages : public Admin{
                 case 6: addAdminUser(); break;
                 case 7: return;
                 default: cout<<"\n\tInvalid choice. Try again. "; 
-                cin.get();
+                cin.ignore();
                 }
             }
         }
@@ -189,7 +189,7 @@ class NavPages : public Admin{
         static void displayProduct()
         {
             system("clear");
-            ifstream displayProducts;						//open the file in read
+            ifstream displayProducts;					
             displayProducts.open("Data/Products.txt", ios::in);
             int n;
             string p;
@@ -198,7 +198,7 @@ class NavPages : public Admin{
             while (1)
             {
                 displayProducts >> n;
-                if (displayProducts.eof())				//check end of the file is reached or not
+                if (displayProducts.eof())
                     break;
                 displayProducts >> p >> r;
                 //displaying on screen
@@ -208,7 +208,7 @@ class NavPages : public Admin{
                 cout << "\n\t=================================================================";
             }
             cout<<"\n\tPress any key";
-            cin.get();
+            cin.ignore();
         }
         
         static void modifyProduct()
@@ -245,7 +245,7 @@ class NavPages : public Admin{
             remove("Data/Products.txt");					//delets the file
             rename("Data/temp.txt", "Data/Products.txt");		//renames the file
             cout << "\n\n\n\tPRODUCT RATE UPDATED SUCCESSFULLY";
-            cin.get();
+            cin.ignore();
         }
     
         //Function to delete products
@@ -281,7 +281,7 @@ class NavPages : public Admin{
             remove("Data/Products.txt");					//removes the file
             rename("Data/temp.txt", "Data/Products.txt");		//renames the file
             cout << "\n\n\n\tPRODUCT DELETED SUCCESSFULLY";
-            cin.get();
+            cin.ignore();
         }
     
         static void displayInvoices() {
@@ -291,7 +291,7 @@ class NavPages : public Admin{
             if (!inInvoice) {							//if file is not created or found
                 cout << "\n\n\tNO INVOICES FOUND!";
                 cout << "\n\tPress any key";
-                cin.get();
+                cin.ignore();
                 return;
             }
     
@@ -303,7 +303,7 @@ class NavPages : public Admin{
             }
             inInvoice.close();
             cout << "\n\tPress any key";
-            cin.get();
+            cin.ignore();
         }	
     };
 

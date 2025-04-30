@@ -1,3 +1,2 @@
-1 Milk 200
 2 Tea 49
 3 Haapy 400
