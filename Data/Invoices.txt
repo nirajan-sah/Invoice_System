@@ -1,0 +1,28 @@
+
+
+	Customer Name: Nirajan Sah
+
+
+	INVOICE 			Date/Time: Tue Apr 29 19:23:24 2025
+
+	======================================================================================
+	Product Number	Product Name	Product Rate	Quantity	Amount
+	            12	        Milk	         130	       2	   260
+	            12	        Milk	         130	       3	   390
+	            12	        Milk	         130	      34	  4420
+
+
+				TOTAL AMOUNT: 5070
+
+
+	Customer Name: Nirajan
+
+
+	INVOICE 			Date/Time: Tue Apr 29 19:33:33 2025
+
+	======================================================================================
+	Product Number	Product Name	Product Rate	Quantity	Amount
+	             1	        Milk	         200	      23	  4600
+
+
+				TOTAL AMOUNT: 4600
